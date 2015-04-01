@@ -1,7 +1,7 @@
 service/npm-debug.log
 service/node_modules
 service/fakeData
-Gemfile.lock
+service/Gemfile.lock
 
 .DS_Store
 .sass-cache
