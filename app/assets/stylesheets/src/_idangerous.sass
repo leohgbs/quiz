@@ -1,0 +1,33 @@
+.swiper-container
+  margin: 0 auto
+  position: relative
+  overflow: hidden
+  @include backface-visibility(hidden) 
+  /* Fix of Webkit flickering */
+  z-index: 1
+
+.swiper-wrapper
+  position: relative
+  width: 100%
+
+  @include transition-property(transform, left, top)
+  @include transition-duration(0s)
+  @include transform(translate3d(0px,0,0))
+  @include transition-timing-function(ease)
+
+  @include box-sizing(content-box)
+
+.swiper-free-mode > .swiper-wrapper
+  @include transition-timing-function(ease-out)
+  margin: 0 auto
+
+.swiper-slide
+  float: left
+  @include box-sizing(content-box)
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal
+  -ms-touch-action: pan-y
+
+.swiper-wp8-vertical
+  -ms-touch-action: pan-x
