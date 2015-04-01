@@ -1,0 +1,10 @@
+service/npm-debug.log
+service/node_modules
+service/fakeData
+Gemfile.lock
+
+.DS_Store
+.sass-cache
+.bundle
+
+*.swp
