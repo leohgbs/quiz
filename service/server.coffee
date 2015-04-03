@@ -1,7 +1,21 @@
 
 _ = require('underscore')
 
+###
+#
+# @mobileList 以m+mobile做键，查询已有的手机
+#
+# @mobileArray mobile数组，用于快速手机
+#
+# @ipList 以ip做键，存储成功领取的ip
+#
+###
 class App
+
+  config:
+
+    # 端口
+    port: 8000
 
   init: ->
     @configServer()
@@ -9,7 +23,6 @@ class App
     @initMobileList()
 
   # 配置express
-  # 端口8000
   configServer: ->
     @express = require('express')
     @path = require('path')
@@ -21,17 +34,14 @@ class App
     @app.use(@bodyParser.urlencoded({extended: false}))
     @app.use(@bodyParser.json())
     @app.use(@express.static('../app'))
-    @app.listen 8000
+    @app.listen @config.port
 
   # 路由
   configRouter: ->
 
     # index
-    # pc: index.html
-    # mobile: mobile.html
     @app.get "/", (req, res) =>
       @routeIndex(req, res)
-
 
     # store mobile
     @app.post /store/, (req, res) =>
@@ -39,25 +49,27 @@ class App
 
   # 首页路由
   routeIndex: (req, res)->
+    # pc和移动端分开
     tpl = if @isMobile(req) then 'mobile.html' else 'desk.html'
 
     @fs.readFile "../app/#{tpl}",(err, data)->
       if (err)
         console.log err
         res.writeHead(500)
-        return res.end(':( 发送错误了')
+        return res.end(':( 发生错误了')
       else
         res.writeHead(200)
         res.end(data)
 
-  # 存储数据
+  # 请求判断
   routeStore: (req, res)->
+    # 返回json
     res.setHeader('Content-Type', 'application/json')
 
     tmpMobile = req.body.mobile
     status = {}
 
-    # 验证手机错误
+    # 验证手机格式
     if not @checkMobile(tmpMobile)
       status =
         success: 0
@@ -66,8 +78,9 @@ class App
       tmpIp = @getRemoteIp(req)
 
       if @isValidate(tmpMobile, tmpIp)
-        @mobileList["m#{tmpMobile}"] = 1
-        @ipList[tmpIp] = 1
+        @mobileList["m#{tmpMobile}"] = tmpIp
+        @ipList[tmpIp] = "m#{tmpMobile}"
+        @mobileArray.push(tmpMobile)
         status =
           success: 1
           error: ""
@@ -76,48 +89,44 @@ class App
           success: 0
           error: "您已经猜过了"
 
-    console.log @mobileList
-    console.log @ipList
-    @saveDB()
     res.end(JSON.stringify(status))
+
+    if status.success is 1
+      # TODO 定时任务
+      console.log "save"
+      @saveDB()
 
   # 查询mobile和ip是否重复
   isValidate: (mobile, ip)->
-    console.log @mobileList
-    console.log @ipList
     return if not @mobileList["m#{mobile}"] and not @ipList[ip] then true else false
 
   checkMobile: (mobile)->
-    return /^1[3-9][0-9]{1}[0-9]{8}$/.test(mobile)
+    return /^1[3-9][0-9]{1}[0-9]{8}$/.test(_.escape(mobile))
 
   # 通过user-agent检测是否为手机访问
   isMobile: (req)->
     deviceAgent = req.headers["user-agent"].toLowerCase()
     return /(ipod|iphone|android|coolpad|mmp|smartphone|midp|wap|xoom|symbian|j2me|blackberry|win ce)/i.test(deviceAgent)
 
-  # 读取removte ip
+  # removte ip
   getRemoteIp: (req)->
     return req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress
 
   # 初始化数据
   initMobileList: ->
+
+    # 获取mobile
     @DB.readFile './mobile.json', (err, obj)=>
       if err
         console.log err
       else
         @mobileList = obj
-
-    @DB.readFile './ip.json', (err, obj)=>
-      if err
-        console.log err
-      else
-        @ipList = obj
+        @ipList = _.invert(@mobileList)
+        @mobileArray = _.keys @mobileList
 
   saveDB: ->
+    # 写入mobile
     @DB.writeFile './mobile.json', @mobileList, (err)->
-      console.log err if err
-
-    @DB.writeFile './ip.json', @ipList, (err)->
       console.log err if err
 
 app = new App()
