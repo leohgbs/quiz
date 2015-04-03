@@ -17,7 +17,7 @@
   width: 100%
 
 .pre-view
-  display: none
+  // display: none
 
 .time-notice
   position: relative
@@ -160,3 +160,16 @@
   position: absolute
   right: percentage(55/640)
   bottom: percentage(22/640)
+
+@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2)
+
+  .swiper-container
+    height: auto
+  .swiper-wrapper
+    height: auto
+
+  .go-next-view
+    display: none
+
+  .logo
+    bottom: 5px!important

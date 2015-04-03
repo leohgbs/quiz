@@ -21,13 +21,13 @@ module.exports = (grunt) ->
           cssDir: '../app/assets/stylesheets/dist'
           outputStyle: 'compressed'
 
-    express:
-      server:
-        options:
-          bases: ['../app']
-          server: 'server.coffee'
-          port: 8000
-          open: true
+    # express:
+    #   server:
+    #     options:
+    #       bases: ['../app']
+    #       server: 'server.coffee'
+    #       port: 8000
+    #       open: true
 
     watch:
       scripts:
@@ -43,7 +43,7 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-compass'
-  grunt.loadNpmTasks 'grunt-express'
+  # grunt.loadNpmTasks 'grunt-express'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['express', 'watch', 'coffee', 'compass']
+  grunt.registerTask 'default', ['watch', 'coffee', 'compass']
