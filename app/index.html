@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="format-detection" content="telephone=no,email=no">
-  <title>index</title>
+  <title>钱包</title>
   <link rel="stylesheet" href="assets/stylesheets/dist/index.css">
 </head>
 <body>
@@ -12,12 +12,70 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide pre-view">
-        A
+        <div class="bg-img"><img src="assets/images/mobile-bg.png" alt="钱包"></div>
+        <div class="time-notice">4月15日告诉你</div>
         <div class="go-next-view">
-          <a class="JS-go-next-view" href="javascript:;">↑↑↑</a>
+          <div class="next-text">有奖竞猜</div>
+          <div class="JS-go-next-view" href="javascript:;">
+            <img src="assets/images/angle-up.png" alt="向上滑动进入竞猜">
+          </div>
         </div>
       </div>
-      <div class="swiper-slide game-view">B</div>
+      <div class="swiper-slide game-view">
+        <div class="game-wrapper">
+          <img class="game-img" src="assets/images/mobile-quiz.png" alt="">
+          <div class="inner">
+            <div class="first">我猜<span>钱包</span>里有: 
+              <label for="consumption"><input type="checkbox" id="consumption"/>消费</label>
+              <label for="finance"><input type="checkbox" id="finance"/>理财</label>
+              <label for="credit"><input type="checkbox" id="credit"/>信贷</label>
+            </div>
+            <div>我猜<span>钱包</span>属于: 
+              <label for="mayun"><input type="checkbox" id="mayun"/>马云</label>
+              <label for="mahuateng"><input type="checkbox" id="mahuateng"/>马化腾</label>
+              <label for="zhaoguodong"><input type="checkbox" id="zhaoguodong"/>赵国栋</label>
+            </div>
+            <div class="mobile-wrapper">
+              我的手机号:<input type="number" class="mobile" required /><button class="send-mobile JS-sen-mobile">提交竞猜</button>
+            </div>
+          </div>
+        </div>
+        <div class="user-list">
+          <h2>猜中者实时榜单</h2>
+          <ul>
+            <li class="current">136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+            
+            <li>136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+
+            <li>136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+
+            <li>136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+            <li>136****1211</li>
+          </ul>
+          <a href="javascript:location.reload();" style="position: fixed; top: 0;right:0">刷新</a>
+        </div>
+        <div class="other-notice">
+          <p>2015年4月14日16:00,</p>
+          <p>将从【猜中者实时榜单 】中抽出30名幸运者,</p>
+          <p>奖励788元知名手工品牌--马骝原色牛皮钱包一枚~</p>
+        </div>
+        <div class="footer">
+          <img src="assets/images/mobile-packet.png" alt="">
+        </div>
+        <div class="footer-msg">获奖榜单将于4月16日在本页面公布。</div>
+        <img class="logo" src="assets/images/mobile-logo.png" alt="钱包">
+      </div>
     </div>
   </div>
 

@@ -13,19 +13,150 @@
 .swiper-slide
   position: relative
 
-.pre-view
-  // todo
-  background: #fff
+.bg-img img
+  width: 100%
 
-.game-view
-  // todo
-  background: #ddd
+.pre-view
+  display: none
+
+.time-notice
+  position: relative
+  margin-top: percentage(-445/640)
+
+  width: 100%
+  color: #fff
+  font-size: 14px
+  text-align: center
 
 .go-next-view
   position: absolute
-  bottom: 10px
+  bottom: percentage(40/640)
 
   width: 100%
   text-align: center
-  font-size: 30px
+  font-size: 12px
+  color: #fff
 
+  .next-text
+    margin-bottom: percentage(40/640)
+  img
+    width: percentage(37/640)
+    @include animation(go 1.2s infinite ease-in)
+
+@keyframes go
+  0%
+    opacity: 0
+  50%
+    opacity: 0.5
+  100%
+    opacity: 1
+                              
+@-webkit-keyframes go
+  0%
+    opacity: 1
+  50%
+    opacity: 0.5
+  100%
+    opacity: 0
+
+@-moz-keyframes go
+  0%
+    opacity: 0
+  50%
+    opacity: 0.5
+  100%
+    opacity: 1
+
+// 竞猜页面
+.game-view
+  position: relative
+  width: 100%
+  @include box-sizing(border-box)
+  padding: 20px 0 percentage(22/530) percentage(50/640)
+
+  background: #fff
+
+.game-wrapper
+  font-size: 11px
+  line-height: 30px
+  color: #666
+
+  .inner
+    overflow: hidden
+
+  .game-img
+    width: percentage(109/530)
+    float: left
+  .first
+    margin-bottom: 6px
+  span 
+    color: #cc3333
+
+  .mobile-wrapper
+    margin-top: 10px
+
+  input[type=checkbox]
+    border-radius: 0
+    border: 1px solid #ccc
+
+  .mobile
+    display: inline-block
+    height: 25px
+    width: percentage(160/530)
+
+    padding: 0 5px
+    border: 1px solid #ccc
+    line-height: 25px
+
+  .send-mobile
+    height: 27px
+    padding: 0 15px
+    margin-left: 5px
+    line-height: 27px
+    color: #fff
+    border: none
+    background: #cc3333
+
+.user-list
+  margin-top: percentage(50/640)
+  font-size: 12px
+  h2
+    text-align: center
+    margin-bottom: percentage(20/640)
+
+  ul
+    overflow: hidden
+  li
+    float: left
+    margin-right: 19px
+    font-size: 10px
+    color: #ccc
+    line-height: 16px
+    
+  li:nth-child(4n)
+    margin-right: 0
+
+  .current
+    color: #cc3333
+
+.other-notice
+  margin-top: percentage(25/640)
+  font-size: 12px
+  color: #666
+  line-height: 20px
+
+.footer
+  margin: percentage(30/640) 0
+  padding-right: percentage(50/640)
+  img
+    width: 100%
+
+.footer-msg
+  font-size: 12px
+  color: #666
+
+.logo
+  width: percentage(99/640)
+  position: absolute
+  right: percentage(55/640)
+  bottom: percentage(22/640)
