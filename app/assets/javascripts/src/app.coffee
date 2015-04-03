@@ -54,7 +54,7 @@ class App
       type: "POST"
       data:
         mobile: $(".mobile").val()
-        right: @checkAnswer()
+        status: @checkAnswer()
       success: (data)->
         console.log JSON.parse(data).status
       error: (e)->

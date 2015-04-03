@@ -61,7 +61,7 @@
         type: "POST",
         data: {
           mobile: $(".mobile").val(),
-          right: this.checkAnswer()
+          status: this.checkAnswer()
         },
         success: function(data) {
           return console.log(JSON.parse(data).status);

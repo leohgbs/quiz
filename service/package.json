@@ -18,9 +18,12 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-coffee": "~0.8.0",
     "grunt-express": "~1.4.1",
+    "underscore": "~1.8.3",
     "express": "~4.10.2"
   },
   "dependencies": {
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "jfs": "^0.2.5",
+    "jsonfile": "^2.0.0"
   }
 }
