@@ -6,6 +6,10 @@ class App
       return false
   )()
 
+  isMicroMessenger: (->
+    /.*MicroMessenger/.test(navigator.appVersion)
+  )()
+
   init: ->
     @intiSwiper()
     @bindEvent()
@@ -21,28 +25,34 @@ class App
       @mySwiper.swipeNext()
 
     _this = @
-    $(".JS-send-mobile").on "click", (e)->
 
-      # return if $(@).hasClass("sending")
+    $(".JS-send-mobile").on "tap", (e)->
 
-      # if $("input:checked").length < 1
-      #   alert "请选择答案"
-      # else
-      #   if not _this.checkMobile($('.mobile').val())
-      #     alert "请输入正确的手机号"
-      #   else
-      #     $(@).addClass("sending")
-      #     _this.sendMobile()
+      return if $(@).hasClass("sending")
 
-      # $(@).text("发送中...")
-      _this.sendMobile()
+      if $("input:checked").length < 1
+        _this.showMsg("no-answer")
+      else
+        if not _this.checkMobile($('.mobile').val())
+          _this.showMsg("wrong-mobile")
+        else
+          $(@).text("发送中...")
+          $(@).addClass("sending")
+          _this.sendMobile()
+
+    $('body').delegate ".close-msg", "tap", ->
+      $('.msg-wrapper').hide()
+
+  showMsg: (msgClass)->
+    $(".#{msgClass}").show()
+
   checkAnswer: ->
     answers = []
 
     $("input:checked").each ->
       answers.push "#{$(@).attr("id")}"
 
-    return if answers.length is 4 and answers[0] is "consumption" and answers[1] is "finance" and answers[2] is "credit" and answers[3] is "zhaoguodong" then true else false
+    return if answers.length is 4 and answers[0] is "consumption" and answers[1] is "finance" and answers[2] is "credit" and answers[3] is "zhaoguodong" then 1 else 0
 
   checkMobile: (mobile)->
     return /^1[3-9][0-9]{1}[0-9]{8}$/.test(mobile)
@@ -54,10 +64,33 @@ class App
       type: "POST"
       data:
         mobile: $(".mobile").val()
-        status: @checkAnswer()
-      success: (data)->
-        console.log JSON.parse(data).status
+        answer: @checkAnswer()
+      success: (data)=>
+        @showStatus(JSON.parse(data))
       error: (e)->
+
+  showStatus: (data)->
+
+    status = data.success
+    $(".JS-send-mobile").removeClass("sending").text("提交竞猜")
+
+    if status is 1
+      if @isMicroMessenger
+        @showMsg("answer-right-w")
+      else
+        @showMsg("answer-right")
+    else if status is 2
+      if @isMicroMessenger
+        @showMsg("wrong-w")
+      else
+        @showMsg("wrong")
+    else if status is 3
+      @showStatus("wrong-mobile")
+    else if status is 4
+      if @isMicroMessenger
+        @showMsg("has-guess-w")
+      else
+        @showMsg("has-guess")
 
 app = new App()
 app.init()

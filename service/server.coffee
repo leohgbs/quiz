@@ -1,14 +1,10 @@
-
 _ = require('underscore')
-
 ###
-#
 # @mobileList 以m+mobile做键，查询已有的手机
 #
 # @mobileArray mobile数组，用于快速手机
 #
 # @ipList 以ip做键，存储成功领取的ip
-#
 ###
 class App
 
@@ -67,38 +63,48 @@ class App
     res.setHeader('Content-Type', 'application/json')
 
     tmpMobile = req.body.mobile
+    answer = parseInt(req.body.answer) || 0
+    console.log answer
     status = {}
 
     # 验证手机格式
     if not @checkMobile(tmpMobile)
       status =
-        success: 0
+        success: 3
         error: "请输入正确的手机"
     else
       tmpIp = @getRemoteIp(req)
 
-      if @isValidate(tmpMobile, tmpIp)
-        @mobileList["m#{tmpMobile}"] = tmpIp
-        @ipList[tmpIp] = "m#{tmpMobile}"
-        @mobileArray.push(tmpMobile)
-        status =
-          success: 1
-          error: ""
+      if @isValidate(tmpMobile, tmpIp, answer)
+        tmp = if answer then "m#{tmpMobile}" else "w#{tmpMobile}"
+        @mobileList[tmp] = tmpIp
+        @ipList[tmpIp] = tmp
+        @mobileArray.push(tmp)
+
+        if answer
+          status =
+            success: 1
+            error: "恭喜您"
+        else
+          status =
+            success: 2
+            error: "您答错了"
       else
         status =
-          success: 0
+          success: 4
           error: "您已经猜过了"
 
     res.end(JSON.stringify(status))
 
-    if status.success is 1
+    if status.success is 1 or status.success is 2
       # TODO 定时任务
       console.log "save"
       @saveDB()
 
   # 查询mobile和ip是否重复
-  isValidate: (mobile, ip)->
-    return if not @mobileList["m#{mobile}"] and not @ipList[ip] then true else false
+  isValidate: (mobile, ip, answer)->
+    tmp = if answer is 1 then "m#{mobile}" else "w#{mobile}"
+    return if not @mobileList[tmp] and not @ipList[ip] then true else false
 
   checkMobile: (mobile)->
     return /^1[3-9][0-9]{1}[0-9]{8}$/.test(_.escape(mobile))
@@ -128,6 +134,5 @@ class App
     # 写入mobile
     @DB.writeFile './mobile.json', @mobileList, (err)->
       console.log err if err
-
 app = new App()
 app.init()
