@@ -3,6 +3,7 @@ service/fakeData
 service/Gemfile.lock
 service/node_modules
 service/mobile.json~
+service/mobile.json
 
 .DS_Store
 .sass-cache
