@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="format-detection" content="telephone=no,email=no">
-  <title>钱包</title>
+  <title>钱包,What？Whose？猜对的幸运者送钱包！</title>
   <link rel="stylesheet" href="assets/stylesheets/dist/index.css">
 </head>
 <body>
 
+  <img src="assets/images/share.png" alt="" style="opacity: 0;position: fixed;"/>
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide pre-view">
@@ -33,9 +34,9 @@
 
           <div><img class="game-whose" src="assets/images/whose.png" alt=""></div>
           <div>我猜钱包属于: 
-            <label for="mayun"><input type="checkbox" id="mayun"/>马云</label>
-            <label for="mahuateng"><input type="checkbox" id="mahuateng"/>马化腾</label>
-            <label for="zhaoguodong"><input type="checkbox" id="zhaoguodong"/>赵国栋</label>
+            <label for="mayun"><input type="checkbox" id="mayun" class="only-one"/>马云</label>
+            <label for="mahuateng"><input type="checkbox" id="mahuateng" class="only-one"/>马化腾</label>
+            <label for="zhaoguodong"><input type="checkbox" id="zhaoguodong" class="only-one"/>赵国栋</label>
           </div>
           <div class="mobile-wrapper">
             我的手机号:<input type="number" class="mobile" required /><button class="send-mobile JS-send-mobile">提交竞猜</button>
@@ -43,22 +44,7 @@
 
           <div class="user-list">
             <h2>猜中者实时榜单</h2>
-            <ul>
-              <li class="current">136****1211</li>
-              <li>136****1211</li>
-              <li>136****1211</li>
-              <li>136****1211</li>
-              
-              <li>136****1211</li>
-              <li>136****1211</li>
-              <li>136****1211</li>
-              <li>136****1211</li>
-
-              <li>136****1211</li>
-              <li>136****1211</li>
-              <li>136****1211</li>
-              <li>136****1211</li>
-            </ul>
+            <ul></ul>
           </div>
           <div class="other-notice">
             <p>2015年4月14日16:00,</p>
@@ -140,7 +126,7 @@
     </div>
   </div>
 
-  <script src="assets/javascripts/lib/zepto.min.js"></script>
+  <script src="assets/javascripts/lib/jquery.js"></script>
   <script src="assets/javascripts/lib/idangerous.swiper.min.js"></script>
   <script src="assets/javascripts/dist/app.js"></script>
 </body>

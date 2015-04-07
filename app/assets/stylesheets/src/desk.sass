@@ -1,0 +1,243 @@
+@import "compass/reset"
+@import "compass/css3"
+@import "base"
+// @import 'idangerous.sass'
+
+// swiper
+.swiper-container
+  height: 100%
+
+.swiper-wrapper
+  height: 100%
+
+.swiper-slide
+  position: relative
+
+.bg-img img
+  width: 100%
+
+.pre-view
+  // display: none
+  line-height: 0
+  background-color: #095890
+  // cursor: -webkit-grab
+  // cursor: -moz-grab
+  // cursor: grab
+
+.time-notice
+  position: relative
+  margin-top: percentage(-445/640)
+
+  width: 100%
+  color: #fff
+  font-size: 30px
+  text-align: center
+
+.go-next-view
+  position: absolute
+  bottom: 10%
+
+  width: 100%
+  text-align: center
+  font-size: 12px
+  color: #fff
+  cursor: pointer
+
+  .next-text
+    font-size: 15px
+    margin-bottom: 20px
+  img
+    // width: percentage(37/640)
+    @include animation(go 1.2s infinite ease-in)
+
+@keyframes go
+  0%
+    opacity: 0
+  50%
+    opacity: 0.5
+  100%
+    opacity: 1
+                              
+@-webkit-keyframes go
+  0%
+    opacity: 1
+  50%
+    opacity: 0.5
+  100%
+    opacity: 0
+
+@-moz-keyframes go
+  0%
+    opacity: 0
+  50%
+    opacity: 0.5
+  100%
+    opacity: 1
+
+// 竞猜页面
+.game-view
+  position: relative
+  margin: 0 auto
+  line-height: 0
+  // @include box-sizing(border-box)
+
+.game-view-inner
+  background: url('../../images/game-bg-desktop.png') center center 
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  
+
+.game-bg
+  width: 100%
+
+.game-wrapper
+  position: relative
+  @include box-sizing(border-box)
+  width: 640px
+  padding-left: 55px
+  margin: 0 auto
+  padding-bottom: 170px
+  margin-top: 75px
+  font-size: 27px
+  color: #fff
+
+  .first
+    margin-bottom: 25px
+
+  .mobile-wrapper
+    margin-top: 55px
+    position: relative
+
+    .pre
+      float: left
+      margin-top: 5px
+      line-height: 24px
+
+  label
+    cursor: pointer
+  .label-margin
+    margin-left: 20px
+
+  input[type=checkbox]
+    cursor: pointer
+    border-radius: 0
+    border: 1px solid #fff
+    background: none
+
+  .mobile
+    display: inline-block
+    height: 34px
+    width: 178px
+    margin-left: 57px
+
+    padding: 0 5px
+    border: 1px solid #fff
+    border-radius: 4px
+    color: #fff
+    line-height: 34px
+    font-size: 22px
+    background: none
+
+  .send-mobile
+    position: absolute
+    height: 36px
+    font-size: 22px
+    padding: 0 15px
+    margin-left: 15px
+    line-height: 36px
+    width: 130px
+    color: #fff
+    border: 1px solid #fff
+    border-radius: 4px
+    background: none
+    cursor: pointer
+
+.user-list
+  margin-top: 115px
+  font-size: 21px
+  h2
+    margin-bottom: 15px
+
+  ul
+    max-height: 95px
+    overflow: hidden
+  li
+    float: left
+    margin-right: 19px
+    font-size: 21px
+    line-height: 30px
+    
+  li:nth-child(4n)
+    margin-right: 0
+
+  .current
+    color: #cc3333
+
+.other-notice
+  margin-top: 25px
+  font-size: 21px
+  line-height: 30px
+
+.footer
+  margin-top: 18px
+  margin-bottom: 20px
+  // padding-right: percentage(50/640)
+
+.footer-msg
+  font-size: 21px
+
+.logo
+  position: absolute
+  right: percentage(55/640)
+  bottom: 40px
+
+.msg-wrapper
+  display: none
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 100
+
+  height: 100%
+  width: 100%
+  padding: 0 10px
+  background: rgba(0, 0, 0, 0.5)
+
+  img
+    width: 450px
+  .msg-inner 
+    position: relative
+    width: 450px
+    margin: 0 auto
+    margin-top: 15%
+
+  .close-msg
+    position: absolute
+    right: 0
+    top: 0
+    cursor: pointer
+    z-index: 105
+    @include opacity(0)
+
+    height: 40px
+    width: 40px
+    line-height: 40px
+    font-size: 50px
+
+.show-msg
+  position: relative
+  img
+    position: absolute
+    left: 184px
+    bottom: -307px
+    z-index: 500
+
+.resume-wrapper
+  img
+    display: none
+
+  &:hover
+    img
+      display: block

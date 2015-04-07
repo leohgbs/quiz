@@ -1,39 +1,14 @@
 class App
-  isiPhone4: (->
-    if window.screen.height is 480 and window.devicePixelRatio is 2
-      return true
-    else
-      return false
-  )()
-
-  isMicroMessenger: (->
-    /.*MicroMessenger/.test(navigator.appVersion)
-  )()
-
   init: ->
-    @intiSwiper()
     @bindEvent()
     @getList()
 
-  slide: ->
-    if @status
-      $(".user-list ul li:lt(4)").remove()
-    @status = 1
-    $wrapper = $(".user-list ul")
-    $before = $(".user-list ul li:lt(4)")
-    $clone = $(".user-list ul li:lt(4)").clone()
-    $wrapper.append($clone)
-    $before.slideUp()
-
-  intiSwiper: ->
-    if not @isiPhone4
-      @mySwiper = $(".swiper-container").swiper
-        mode: 'vertical'
-        loop: false
-
   bindEvent: ->
     $(".JS-go-next-view").on "click", (e)=>
-      @mySwiper.swipeNext()
+      top = $(".game-view").position().top
+      $('html, body').animate
+        scrollTop: top
+      , "slow"
 
     _this = @
 
@@ -57,6 +32,7 @@ class App
     $("body").delegate ".only-one", "change", ->
       $(".only-one").removeAttr("checked")
       $(@).prop("checked", true)
+
 
   showMsg: (msgClass)->
     $(".#{msgClass}").show()
@@ -90,22 +66,13 @@ class App
     $(".JS-send-mobile").removeClass("sending").text("提交竞猜")
 
     if status is 1
-      if @isMicroMessenger
-        @showMsg("answer-right-w")
-      else
-        @showMsg("answer-right")
+      @showMsg("answer-right")
     else if status is 2
-      if @isMicroMessenger
-        @showMsg("wrong-w")
-      else
-        @showMsg("wrong")
+      @showMsg("wrong")
     else if status is 3
       @showStatus("wrong-mobile")
     else if status is 4
-      if @isMicroMessenger
-        @showMsg("has-guess-w")
-      else
-        @showMsg("has-guess")
+      @showMsg("has-guess")
 
   getList: ->
     $.ajax
@@ -120,11 +87,12 @@ class App
 
           $(".user-list ul").html(tpl)
           @showHide()
+
       error: (e)->
 
   showHide: ->
     if $(".user-list ul li").length > 12
-      setInterval @slide, 1500
+      setInterval @slide, 1000
 
   slide: ->
     if @status
@@ -135,5 +103,6 @@ class App
     $clone = $(".user-list ul li:lt(4)").clone()
     $wrapper.append($clone)
     $before.slideUp()
+
 app = new App()
 app.init()

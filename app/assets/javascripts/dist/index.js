@@ -4,50 +4,19 @@
   App = (function() {
     function App() {}
 
-    App.prototype.isiPhone4 = (function() {
-      if (window.screen.height === 480 && window.devicePixelRatio === 2) {
-        return true;
-      } else {
-        return false;
-      }
-    })();
-
-    App.prototype.isMicroMessenger = (function() {
-      return /.*MicroMessenger/.test(navigator.appVersion);
-    })();
-
     App.prototype.init = function() {
-      this.intiSwiper();
       this.bindEvent();
       return this.getList();
-    };
-
-    App.prototype.slide = function() {
-      var $before, $clone, $wrapper;
-      if (this.status) {
-        $(".user-list ul li:lt(4)").remove();
-      }
-      this.status = 1;
-      $wrapper = $(".user-list ul");
-      $before = $(".user-list ul li:lt(4)");
-      $clone = $(".user-list ul li:lt(4)").clone();
-      $wrapper.append($clone);
-      return $before.slideUp();
-    };
-
-    App.prototype.intiSwiper = function() {
-      if (!this.isiPhone4) {
-        return this.mySwiper = $(".swiper-container").swiper({
-          mode: 'vertical',
-          loop: false
-        });
-      }
     };
 
     App.prototype.bindEvent = function() {
       var _this = this;
       $(".JS-go-next-view").on("click", function(e) {
-        return _this.mySwiper.swipeNext();
+        var top;
+        top = $(".game-view").position().top;
+        return $('html, body').animate({
+          scrollTop: top
+        }, "slow");
       });
       _this = this;
       $(".JS-send-mobile").on("click", function(e) {
@@ -118,25 +87,13 @@
       status = data.success;
       $(".JS-send-mobile").removeClass("sending").text("提交竞猜");
       if (status === 1) {
-        if (this.isMicroMessenger) {
-          return this.showMsg("answer-right-w");
-        } else {
-          return this.showMsg("answer-right");
-        }
+        return this.showMsg("answer-right");
       } else if (status === 2) {
-        if (this.isMicroMessenger) {
-          return this.showMsg("wrong-w");
-        } else {
-          return this.showMsg("wrong");
-        }
+        return this.showMsg("wrong");
       } else if (status === 3) {
         return this.showStatus("wrong-mobile");
       } else if (status === 4) {
-        if (this.isMicroMessenger) {
-          return this.showMsg("has-guess-w");
-        } else {
-          return this.showMsg("has-guess");
-        }
+        return this.showMsg("has-guess");
       }
     };
 
@@ -163,7 +120,7 @@
 
     App.prototype.showHide = function() {
       if ($(".user-list ul li").length > 12) {
-        return setInterval(this.slide, 1500);
+        return setInterval(this.slide, 1000);
       }
     };
 

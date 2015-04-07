@@ -43,6 +43,10 @@ class App
     @app.post /store/, (req, res) =>
       @routeStore(req, res)
 
+    # get mobile
+    @app.post /list/, (req, res) =>
+      @listMobile(req, res)
+
   # 首页路由
   routeIndex: (req, res)->
     # pc和移动端分开
@@ -79,9 +83,10 @@ class App
         tmp = if answer then "m#{tmpMobile}" else "w#{tmpMobile}"
         @mobileList[tmp] = tmpIp
         @ipList[tmpIp] = tmp
-        @mobileArray.push(tmp)
 
         if answer
+          @mobileArray.push(tmpMobile)
+
           status =
             success: 1
             error: "恭喜您"
@@ -100,6 +105,21 @@ class App
       # TODO 定时任务
       console.log "save"
       @saveDB()
+
+  listMobile: (req, res)->
+    res.setHeader('Content-Type', 'application/json')
+    range = 24
+    all = @mobileArray.length
+
+    start = if all < range then 0 else all - range
+    result = @mobileArray.slice(start, all)
+    result = result.reverse()
+    _.each result, (value, key)->
+      value = value.replace("m", "")
+      result[key] = value.substr(0,3) + "****" + value.substr(7, all)
+
+
+    res.end JSON.stringify(result)
 
   # 查询mobile和ip是否重复
   isValidate: (mobile, ip, answer)->
@@ -128,7 +148,12 @@ class App
       else
         @mobileList = obj
         @ipList = _.invert(@mobileList)
-        @mobileArray = _.keys @mobileList
+        @tmpMobileArray = _.keys @mobileList
+        @mobileArray = []
+
+        _.each @tmpMobileArray, (value, key)=>
+          if value.charAt(0) is 'm'
+            @mobileArray.push value
 
   saveDB: ->
     # 写入mobile
