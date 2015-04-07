@@ -66,6 +66,7 @@ class App
     $(".JS-send-mobile").removeClass("sending").text("提交竞猜")
 
     if status is 1
+      $(".mobile").val("")
       @showMsg("answer-right")
     else if status is 2
       @showMsg("wrong")

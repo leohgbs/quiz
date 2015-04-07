@@ -90,6 +90,7 @@ class App
     $(".JS-send-mobile").removeClass("sending").text("提交竞猜")
 
     if status is 1
+      mobile: $(".mobile").val("")
       if @isMicroMessenger
         @showMsg("answer-right-w")
       else

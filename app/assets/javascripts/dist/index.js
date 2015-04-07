@@ -87,6 +87,7 @@
       status = data.success;
       $(".JS-send-mobile").removeClass("sending").text("提交竞猜");
       if (status === 1) {
+        $(".mobile").val("");
         return this.showMsg("answer-right");
       } else if (status === 2) {
         return this.showMsg("wrong");
