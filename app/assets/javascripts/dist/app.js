@@ -119,6 +119,7 @@
       $(".JS-send-mobile").removeClass("sending").text("提交竞猜");
       if (status === 1) {
         $(".mobile").val("");
+        this.getList();
         if (this.isMicroMessenger) {
           return this.showMsg("answer-right-w");
         } else {

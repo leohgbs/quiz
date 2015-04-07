@@ -91,6 +91,7 @@ class App
 
     if status is 1
       $(".mobile").val("")
+      @getList()
       if @isMicroMessenger
         @showMsg("answer-right-w")
       else

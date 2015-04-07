@@ -67,6 +67,7 @@ class App
 
     if status is 1
       $(".mobile").val("")
+      @getList()
       @showMsg("answer-right")
     else if status is 2
       @showMsg("wrong")
