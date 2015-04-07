@@ -1,6 +1,7 @@
 service/npm-debug.log
 service/fakeData
 service/Gemfile.lock
+service/node_modules
 service/mobile.json~
 
 .DS_Store
