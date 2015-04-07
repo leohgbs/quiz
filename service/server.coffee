@@ -116,7 +116,7 @@ class App
     result = result.reverse()
     _.each result, (value, key)->
       value = value.replace("m", "")
-      result[key] = value.substr(0,3) + "****" + value.substr(7, all)
+      result[key] = value.substr(0,3) + "****" + value.substr(7, value.length)
 
 
     res.end JSON.stringify(result)
