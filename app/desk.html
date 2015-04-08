@@ -9,22 +9,31 @@
 </head>
 <body>
 
-  <div class="swiper-container">
+  <div class="swiper-container" id="main-scroll">
     <div class="swiper-wrapper">
       <div class="swiper-slide pre-view">
         <div class="bg-img"><img src="assets/images/desk-bg.png" alt="钱包"></div>
         <!-- <div class="time-notice">4月15日告诉你</div> -->
-        <div class="go-next-view">
+        <div class="go-next-view btn-pre">
           <div class="next-text">有奖竞猜</div>
           <div class="JS-go-next-view" href="javascript:;">
-            <img src="assets/images/angle-up.png" alt="向上滑动进入竞猜">
+            <img src="assets/images/angle-up.png" alt="向上滑动进入竞猜" class="go-next">
           </div>
         </div>
       </div>
       <div class="swiper-slide game-view">
         <!-- <img class="game-bg" src="assets/images/game-bg-desktop.png" alt=""> -->
         <div class="game-view-inner">
+
         <div class="game-wrapper">
+
+          <div class="go-next-view">
+            <div class="next-text">回到首页</div>
+            <div class="JS-go-pre-view" href="javascript:;">
+              <img src="assets/images/angle-up.png" alt="回到首页">
+            </div>
+          </div>
+
           <div style="margin-bottom:0px"><img class="game-what" src="assets/images/what.png" alt=""></div>
           <div class="first">我猜钱包里有: 
             <label for="consumption"style="margin-left:20px"><input type="checkbox" id="consumption"/>消费</label>
@@ -138,6 +147,7 @@
 
   <a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=&amp;style=3&amp;fs=4&amp;textcolor=#fff&amp;bgcolor=#9C3&amp;text=分享到"></script>
   <script src="assets/javascripts/lib/jquery.js"></script>
+  <script src="assets/javascripts/lib/jquery.slimscroll.js"></script>
   <script src="assets/javascripts/dist/index.js"></script>
 </body>
 </html>

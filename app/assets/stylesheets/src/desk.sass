@@ -3,6 +3,8 @@
 @import "base"
 // @import 'idangerous.sass'
 
+body
+  letter-spacing: 1px
 // swiper
 .swiper-container
   height: 100%
@@ -46,6 +48,8 @@
     margin-bottom: 20px
   img
     @include animation(go 1.2s infinite ease-in)
+  .go-next
+    @include rotate(180deg)
 
 @keyframes go
   0%
@@ -73,6 +77,7 @@
 
 // 竞猜页面
 .game-view
+  display: none
   position: relative
   margin: 0 auto
   line-height: 0
@@ -99,6 +104,9 @@
   font-size: 16px
   color: #fff
 
+  .go-next-view 
+    bottom: 20px
+    margin-left: -50px
   .first
     margin-bottom: 15px
 
@@ -164,11 +172,11 @@
     margin-bottom: 15px
 
   ul
-    max-height: 95px
+    max-height: 60px
     overflow: hidden
   li
     float: left
-    margin-right: 19px
+    margin-right: 60px
     font-size: 14px
     line-height: 20px
     color: #ccc
@@ -184,6 +192,7 @@
   font-size: 14px
   line-height: 20px
   color: #ccc
+  letter-spacing: 2px
 
 .footer
   margin-top: 18px
@@ -193,6 +202,7 @@
   font-size: 14px
   line-height: 14px
   color: #ccc
+  letter-spacing: 2px
 
 .logo
   position: absolute
@@ -236,13 +246,14 @@
   position: relative
   img
     position: absolute
-    left: 127px
-    bottom: -307px
+    left: 133px
+    bottom: -172px
     z-index: 500
 
 .resume-wrapper
   img
     display: none
+    width: 300px
 
   &:hover
     img

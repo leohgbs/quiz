@@ -11,12 +11,20 @@
 
     App.prototype.bindEvent = function() {
       var _this = this;
-      $(".JS-go-next-view").on("click", function(e) {
-        var top;
-        top = $(".game-view").position().top;
-        return $('html, body').animate({
-          scrollTop: top
-        }, "slow");
+      $(".JS-go-next-view").on("click", function() {
+        $(".btn-pre").hide().css({
+          "opatity": 0
+        });
+        $(".game-view").show();
+        return $(".pre-view").slideUp("slow");
+      });
+      $(".JS-go-pre-view").on("click", function(e) {
+        $(".pre-view").slideDown("slow", function() {
+          return $(".btn-pre").css({
+            "opatity": 1
+          }).show();
+        });
+        return $(".game-view").hide();
       });
       _this = this;
       $(".JS-send-mobile").on("click", function(e) {
@@ -146,5 +154,11 @@
   app = new App();
 
   app.init();
+
+  $(function() {
+    return $("#main-scroll").slimScroll({
+      height: $(window).height()
+    });
+  });
 
 }).call(this);

@@ -4,11 +4,23 @@ class App
     @getList()
 
   bindEvent: ->
-    $(".JS-go-next-view").on "click", (e)=>
-      top = $(".game-view").position().top
-      $('html, body').animate
-        scrollTop: top
-      , "slow"
+    $(".JS-go-next-view").on "click", ()->
+
+      $(".btn-pre").hide().css
+        "opatity": 0
+      $(".game-view").show()
+      $(".pre-view").slideUp("slow")
+      # top = $(".game-view").position().top
+      # $('html, body').animate
+      #   scrollTop: top
+      # , "slow"
+    $(".JS-go-pre-view").on "click", (e)=>
+
+      $(".pre-view").slideDown "slow", ->
+        $(".btn-pre").css
+          "opatity": 1
+        .show()
+      $(".game-view").hide()
 
     _this = @
 
@@ -108,3 +120,6 @@ class App
 
 app = new App()
 app.init()
+$ ->
+  $("#main-scroll").slimScroll
+    height: $(window).height()
