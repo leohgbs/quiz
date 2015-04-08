@@ -20,7 +20,7 @@ class App
         $(".btn-pre").css
           "opatity": 1
         .show()
-      $(".game-view").hide()
+        $(".game-view").hide()
 
     _this = @
 

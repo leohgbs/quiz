@@ -19,12 +19,12 @@
         return $(".pre-view").slideUp("slow");
       });
       $(".JS-go-pre-view").on("click", function(e) {
-        $(".pre-view").slideDown("slow", function() {
-          return $(".btn-pre").css({
+        return $(".pre-view").slideDown("slow", function() {
+          $(".btn-pre").css({
             "opatity": 1
           }).show();
+          return $(".game-view").hide();
         });
-        return $(".game-view").hide();
       });
       _this = this;
       $(".JS-send-mobile").on("click", function(e) {
