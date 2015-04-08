@@ -2,14 +2,6 @@
 @import "compass/css3"
 @import "base"
 @import 'idangerous.sass'
-// base设置
-* 
-  -webkit-tap-highlight-color: transparent
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button
-  -webkit-appearance: none
-  margin: 0
 
 // swiper
 .swiper-container
@@ -140,7 +132,7 @@ input[type=number]::-webkit-outer-spin-button
     line-height: 27px
     color: #fff
     border: 1px solid #fff
-    border-radius: 4px
+    // border-radius: 4px
     background: none
 
 @media screen and (device-aspect-ratio: 40/71)
@@ -178,6 +170,7 @@ input[type=number]::-webkit-outer-spin-button
   margin-top: percentage(25/640)
   font-size: 12px
   line-height: 15px
+  word-spacing: 5px
   color: #ccc
 
 @media screen and (device-aspect-ratio: 40/71)
@@ -192,6 +185,7 @@ input[type=number]::-webkit-outer-spin-button
 
 .footer-msg
   font-size: 12px
+  line-height: 12px
   color: #ccc
 
 @media screen and (device-aspect-ratio: 40/71)
@@ -216,6 +210,14 @@ input[type=number]::-webkit-outer-spin-button
 
   .logo
     bottom: 5px!important
+
+  .bg-img
+    line-height: 0
+
+  .game-view
+    line-height: 0
+  .game-wrapper
+    font-size: 12px!important
 
 .msg-wrapper
   display: none

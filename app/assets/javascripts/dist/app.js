@@ -69,6 +69,11 @@
       $('body').delegate(".close-msg", "click", function() {
         return $('.msg-wrapper').hide();
       });
+      if (this.isiPhone4) {
+        $('body').delegate(".msg-inner", "click", function() {
+          return $('.msg-wrapper').hide();
+        });
+      }
       return $("body").delegate(".only-one", "change", function() {
         $(".only-one").removeAttr("checked");
         return $(this).prop("checked", true);

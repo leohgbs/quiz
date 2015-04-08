@@ -54,6 +54,10 @@ class App
     $('body').delegate ".close-msg", "click", ->
       $('.msg-wrapper').hide()
 
+    if @isiPhone4
+      $('body').delegate ".msg-inner", "click", ->
+        $('.msg-wrapper').hide()
+
     $("body").delegate ".only-one", "change", ->
       $(".only-one").removeAttr("checked")
       $(@).prop("checked", true)
