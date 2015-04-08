@@ -30,7 +30,7 @@
 
 .go-next-view
   position: absolute
-  bottom: percentage(40/640)
+  bottom: percentage(30/640)
 
   width: 100%
   text-align: center
@@ -82,19 +82,26 @@
   position: absolute
   top: 0
   left: 0
-  padding: 20px 0 percentage(22/530) percentage(55/640)
+  // padding: percentage(75/640) 0 percentage(22/530) percentage(55/640)
+  padding-top: percentage(55/640)
   font-size: 14px
   color: #fff
+  line-height: 0
 
+  .inner
+    width: percentage(540/640)
+    margin: 0 auto
+
+  .label-1 label
+    margin-left: 4px
+    
   .game-what
+    line-height: 0
     width: percentage(88/585)
 
   .game-whose
     width: percentage(113/585)
 
-  // .game-img
-  //   width: percentage(109/530)
-  //   float: left
   .first
     margin-bottom: 6px
   span 
@@ -111,11 +118,11 @@
     display: inline-block
     height: 25px
     width: percentage(160/530)
-    margin-left: 20px
+    margin-left: 23px
 
     padding: 0 5px
     border: 1px solid #fff
-    border-radius: 4px
+    // border-radius: 4px
     color: #fff
     line-height: 25px
     background: none
@@ -130,9 +137,14 @@
     border-radius: 4px
     background: none
 
+@media screen and (device-aspect-ratio: 40/71)
+  .game-wrapper
+    font-size: 13px
+
 .user-list
-  margin-top: percentage(50/640)
+  margin-top: percentage(60/640)
   font-size: 12px
+  color: #ccc
   h2
     margin-bottom: percentage(30/640)
 
@@ -141,7 +153,7 @@
     max-height: 50px
   li
     float: left
-    margin-right: 11px
+    margin-right: 8px
     font-size: 12px
     line-height: 16px
     color: #ccc
@@ -152,20 +164,33 @@
   .current
     color: #cc3333
 
+@media screen and (device-aspect-ratio: 40/71)
+  .user-list > ul > li 
+    margin-right: 2px
+
 .other-notice
   margin-top: percentage(25/640)
   font-size: 12px
-  line-height: 20px
+  line-height: 15px
+  color: #ccc
+
+@media screen and (device-aspect-ratio: 40/71)
+  .other-notice
+    font-size: 11px
 
 .footer
   margin: percentage(30/640) 0
   margin-top: percentage(20/640)
-  padding-right: percentage(50/640)
   img
     width: 100%
 
 .footer-msg
   font-size: 12px
+  color: #ccc
+
+@media screen and (device-aspect-ratio: 40/71)
+  .footer-msg
+    font-size: 11px
 
 .logo
   width: percentage(99/640)
