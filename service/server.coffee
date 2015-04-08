@@ -68,7 +68,6 @@ class App
 
     tmpMobile = req.body.mobile
     answer = parseInt(req.body.answer) || 0
-    console.log answer
     status = {}
 
     # 验证手机格式

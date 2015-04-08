@@ -37,9 +37,13 @@
           if (!_this.checkMobile($('.mobile').val())) {
             return _this.showMsg("wrong-mobile");
           } else {
-            $(this).text("发送中...");
-            $(this).addClass("sending");
-            return _this.sendMobile();
+            if (!_this.checkAnswer()) {
+              return _this.showMsg("wrong");
+            } else {
+              $(this).text("发送中...");
+              $(this).addClass("sending");
+              return _this.sendMobile();
+            }
           }
         }
       });

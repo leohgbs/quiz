@@ -79,7 +79,6 @@
       res.setHeader('Content-Type', 'application/json');
       tmpMobile = req.body.mobile;
       answer = parseInt(req.body.answer) || 0;
-      console.log(answer);
       status = {};
       if (!this.checkMobile(tmpMobile)) {
         status = {

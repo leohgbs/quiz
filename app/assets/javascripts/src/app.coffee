@@ -47,9 +47,12 @@ class App
         if not _this.checkMobile($('.mobile').val())
           _this.showMsg("wrong-mobile")
         else
-          $(@).text("发送中...")
-          $(@).addClass("sending")
-          _this.sendMobile()
+          if not _this.checkAnswer()
+            _this.showMsg("wrong")
+          else
+            $(@).text("发送中...")
+            $(@).addClass("sending")
+            _this.sendMobile()
 
     $('body').delegate ".close-msg", "click", ->
       $('.msg-wrapper').hide()
