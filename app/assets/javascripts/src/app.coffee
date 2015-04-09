@@ -15,16 +15,6 @@ class App
     @bindEvent()
     @getList()
 
-  slide: ->
-    if @status
-      $(".user-list ul li:lt(4)").remove()
-    @status = 1
-    $wrapper = $(".user-list ul")
-    $before = $(".user-list ul li:lt(4)")
-    $clone = $(".user-list ul li:lt(4)").clone()
-    $wrapper.append($clone)
-    $before.slideUp()
-
   intiSwiper: ->
     if not @isiPhone4
       @mySwiper = $(".swiper-container").swiper
@@ -99,22 +89,13 @@ class App
     if status is 1
       $(".mobile").val("")
       @getList()
-      if @isMicroMessenger
-        @showMsg("answer-right-w")
-      else
-        @showMsg("answer-right")
+      @showMsg("answer-right")
     else if status is 2
-      if @isMicroMessenger
-        @showMsg("wrong-w")
-      else
-        @showMsg("wrong")
+      @showMsg("wrong")
     else if status is 3
       @showStatus("wrong-mobile")
     else if status is 4
-      if @isMicroMessenger
-        @showMsg("has-guess-w")
-      else
-        @showMsg("has-guess")
+      @showMsg("has-guess")
 
   getList: ->
     $.ajax
@@ -127,18 +108,20 @@ class App
           $.each data, (key, value)->
             tpl += "<li>#{value.replace("m", "")}</li>"
 
+          clearInterval(@interval)
+          window.status = 0
           $(".user-list ul").html(tpl)
           @showHide()
       error: (e)->
 
   showHide: ->
     if $(".user-list ul li").length > 12
-      setInterval @slide, 1500
+      @interval = setInterval @slide, 2000
 
   slide: ->
-    if @status
+    if window.status is "1"
       $(".user-list ul li:lt(4)").remove()
-    @status = 1
+    window.status = 1
     $wrapper = $(".user-list ul")
     $before = $(".user-list ul li:lt(4)")
     $clone = $(".user-list ul li:lt(4)").clone()

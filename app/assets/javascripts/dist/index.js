@@ -124,6 +124,8 @@
             $.each(data, function(key, value) {
               return tpl += "<li>" + (value.replace("m", "")) + "</li>";
             });
+            clearInterval(_this.interval);
+            window.status = 0;
             $(".user-list ul").html(tpl);
             return _this.showHide();
           }
@@ -134,16 +136,16 @@
 
     App.prototype.showHide = function() {
       if ($(".user-list ul li").length > 12) {
-        return setInterval(this.slide, 1000);
+        return this.interval = setInterval(this.slide, 2000);
       }
     };
 
     App.prototype.slide = function() {
       var $before, $clone, $wrapper;
-      if (this.status) {
+      if (window.status === "1") {
         $(".user-list ul li:lt(4)").remove();
       }
-      this.status = 1;
+      window.status = 1;
       $wrapper = $(".user-list ul");
       $before = $(".user-list ul li:lt(4)");
       $clone = $(".user-list ul li:lt(4)").clone();

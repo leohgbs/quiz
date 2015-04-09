@@ -102,6 +102,8 @@ class App
           $.each data, (key, value)->
             tpl += "<li>#{value.replace("m", "")}</li>"
 
+          clearInterval(@interval)
+          window.status = 0
           $(".user-list ul").html(tpl)
           @showHide()
 
@@ -109,12 +111,12 @@ class App
 
   showHide: ->
     if $(".user-list ul li").length > 12
-      setInterval @slide, 1000
+      @interval = setInterval @slide, 2000
 
   slide: ->
-    if @status
+    if window.status is "1"
       $(".user-list ul li:lt(4)").remove()
-    @status = 1
+    window.status = 1
     $wrapper = $(".user-list ul")
     $before = $(".user-list ul li:lt(4)")
     $clone = $(".user-list ul li:lt(4)").clone()
