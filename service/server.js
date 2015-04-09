@@ -10,7 +10,6 @@
   #
    * @mobileArray mobile数组，用于快速手机
   #
-   * @ipList 以ip做键，存储成功领取的ip
    */
 
   App = (function() {
@@ -75,10 +74,9 @@
     };
 
     App.prototype.routeStore = function(req, res) {
-      var answer, status, tmp, tmpIp, tmpMobile;
+      var status, tmpMobile;
       res.setHeader('Content-Type', 'application/json');
       tmpMobile = req.body.mobile;
-      answer = parseInt(req.body.answer) || 0;
       status = {};
       if (!this.checkMobile(tmpMobile)) {
         status = {
@@ -86,23 +84,13 @@
           error: "请输入正确的手机"
         };
       } else {
-        tmpIp = this.getRemoteIp(req);
-        if (this.isValidate(tmpMobile, tmpIp, answer)) {
-          tmp = answer ? "m" + tmpMobile : "w" + tmpMobile;
-          this.mobileList[tmp] = tmpIp;
-          this.ipList[tmpIp] = tmp;
-          if (answer) {
-            this.mobileArray.push(tmpMobile);
-            status = {
-              success: 1,
-              error: "恭喜您"
-            };
-          } else {
-            status = {
-              success: 2,
-              error: "您答错了"
-            };
-          }
+        if (this.isValidate(tmpMobile)) {
+          this.mobileList["m" + tmpMobile] = 1;
+          this.mobileArray.push(tmpMobile);
+          status = {
+            success: 1,
+            error: "恭喜您"
+          };
         } else {
           status = {
             success: 4,
@@ -111,8 +99,7 @@
         }
       }
       res.end(JSON.stringify(status));
-      if (status.success === 1 || status.success === 2) {
-        console.log("save");
+      if (status.success === 1) {
         return this.saveDB();
       }
     };
@@ -132,10 +119,8 @@
       return res.end(JSON.stringify(result));
     };
 
-    App.prototype.isValidate = function(mobile, ip, answer) {
-      var tmp;
-      tmp = answer === 1 ? "m" + mobile : "w" + mobile;
-      if (!this.mobileList[tmp] && !this.ipList[ip]) {
+    App.prototype.isValidate = function(mobile) {
+      if (!this.mobileList["m" + mobile]) {
         return true;
       } else {
         return false;
@@ -152,10 +137,6 @@
       return /(ipod|iphone|android|coolpad|mmp|smartphone|midp|wap|xoom|symbian|j2me|blackberry|win ce)/i.test(deviceAgent);
     };
 
-    App.prototype.getRemoteIp = function(req) {
-      return req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-    };
-
     App.prototype.initMobileList = function() {
       return this.DB.readFile('./mobile.json', (function(_this) {
         return function(err, obj) {
@@ -163,7 +144,6 @@
             return console.log(err);
           } else {
             _this.mobileList = obj;
-            _this.ipList = _.invert(_this.mobileList);
             _this.tmpMobileArray = _.keys(_this.mobileList);
             _this.mobileArray = [];
             return _.each(_this.tmpMobileArray, function(value, key) {
