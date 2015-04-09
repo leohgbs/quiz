@@ -1,11 +1,21 @@
+$baseFontSize: 64px * 0.625
+
+// pixels to rems
+@function pxToRem($px)
+  @return $px / $baseFontSize * 1rem
+
+// responsive font-size
+@mixin fontSize($fontSize)
+  &
+    font-size: #{$fontSize}px
+  [data-dpr="3"] &
+    font-size: #{$fontSize * 1.6875}px
 
 html, body
   height: 100%
-  // font-size: 62.5%
   font-family: "Microsoft Yahei"
   background: #fff
 
-// base设置
 * 
   -webkit-tap-highlight-color: transparent
 

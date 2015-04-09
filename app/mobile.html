@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="format-detection" content="telephone=no,email=no">
   <title>钱包，What？Whose？猜对的幸运者送钱包！</title>
+  <script>
+    !function(a){function b(){var b=g.getBoundingClientRect().width;b/c>540&&(b=540*c),a.rem=b/16,g.style.fontSize=a.rem+"px"}var c,d,e,f=a.document,g=f.documentElement,h=f.querySelector('meta[name="viewport"]'),i=f.querySelector('meta[name="flexible"]');if(h){console.warn("将根据已有的meta标签来设置缩放比例");var j=h.getAttribute("content").match(/initial\-scale=(["']?)([\d\.]+)\1?/);j&&(d=parseFloat(j[2]),c=parseInt(1/d))}else if(i){var j=i.getAttribute("content").match(/initial\-dpr=(["']?)([\d\.]+)\1?/);j&&(c=parseFloat(j[2]),d=parseFloat((1/c).toFixed(2)))}if(!c&&!d){var k=(a.navigator.appVersion.match(/android/gi),a.navigator.appVersion.match(/iphone/gi)),c=a.devicePixelRatio;c=k?c>=3?3:c>=2?2:2:2,d=1/c}if(g.setAttribute("data-dpr",c),!h)if(h=f.createElement("meta"),h.setAttribute("name","viewport"),wx=/MicroMessenger/i.test(navigator.userAgent),uc=/UCBrowser/i.test(navigator.userAgent),mq=/MQQBrowser/i.test(navigator.userAgent),h.setAttribute("content","initial-scale="+d+", maximum-scale="+d+", minimum-scale="+d+", user-scalable=no"+(wx||uc||mq?"":", target-densitydpi=device-dpi")),g.firstElementChild)g.firstElementChild.appendChild(h);else{var l=f.createElement("div");l.appendChild(h),f.write(l.innerHTML)}a.dpr=c,a.addEventListener("resize",function(){clearTimeout(e),e=setTimeout(b,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(e),e=setTimeout(b,300))},!1),"complete"===f.readyState?f.body.style.fontSize=12*c+"px":f.addEventListener("DOMContentLoaded",function(){f.body.style.fontSize=12*c+"px"},!1),b()}(window);
+  </script>
   <link rel="stylesheet" href="assets/stylesheets/dist/index.css">
 </head>
 <body>
@@ -28,16 +30,16 @@
           <div class="inner">
           <div><img class="game-what" src="assets/images/what.png" alt=""></div>
           <div class="first label-1">我猜钱包里有(多选): 
-            <label for="consumption"><input type="checkbox" id="consumption"/>消费</label>
-            <label for="finance"><input type="checkbox" id="finance"/>理财</label>
-            <label for="credit" style="margin-left:1px"><input type="checkbox" id="credit"/>信贷</label>
+            <label for="consumption"><input type="checkbox" id="consumption"/><label for=""></label>消费</label>
+            <label for="finance"><input type="checkbox" id="finance"/><label for=""></label>理财</label>
+            <label for="credit" style="margin-left:1px"><input type="checkbox" id="credit"/><label for=""></label>信贷</label>
           </div>
 
           <div><img class="game-whose" src="assets/images/whose.png" alt=""></div>
-          <div class="label-1">我猜钱包属于: 
-            <label for="mayun"><input type="checkbox" id="mayun" class="only-one"/>马云</label>
-            <label for="mahuateng"><input type="checkbox" id="mahuateng" class="only-one"/>马化腾</label>
-            <label for="zhaoguodong"><input type="checkbox" id="zhaoguodong" class="only-one"/>赵国栋</label>
+          <div class="label-1">我猜钱包属于(单选): 
+            <label for="mayun"><input type="checkbox" id="mayun" class="only-one"/><label for=""></label>马云</label>
+            <label for="mahuateng"><input type="checkbox" id="mahuateng" class="only-one"/><label for=""></label>马化腾</label>
+            <label for="zhaoguodong"><input type="checkbox" id="zhaoguodong" class="only-one"/><label for=""></label>赵国栋</label>
           </div>
           <div class="mobile-wrapper">
             我的手机号:<input type="number" class="mobile" required /><button class="send-mobile JS-send-mobile">提交竞猜</button>
