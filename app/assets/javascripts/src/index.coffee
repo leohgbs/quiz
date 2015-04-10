@@ -97,9 +97,13 @@ class App
       dataType: 'JSON'
       type: "POST"
       success: (data)=>
-        if data.length
+        userlist = data.result
+
+        @showStatistic(data)
+
+        if userlist
           tpl = ''
-          $.each data, (key, value)->
+          $.each userlist, (key, value)->
             tpl += "<li>#{value.replace("m", "")}</li>"
 
           clearInterval(@interval)
@@ -108,6 +112,11 @@ class App
           @showHide()
 
       error: (e)->
+
+  showStatistic: (data)->
+    $(".num-total").html(data.totalvisit)
+    $(".num-got").html(data.total)
+    $(".statistic").show()
 
   showHide: ->
     if $(".user-list ul li").length > 12

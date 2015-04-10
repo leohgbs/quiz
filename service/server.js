@@ -4,14 +4,6 @@
 
   _ = require('underscore');
 
-
-  /*
-   * @mobileList 以m+mobile做键，查询已有的手机
-  #
-   * @mobileArray mobile数组，用于快速手机
-  #
-   */
-
   App = (function() {
     function App() {}
 
@@ -43,7 +35,10 @@
     App.prototype.configRouter = function() {
       this.app.get("/", (function(_this) {
         return function(req, res) {
-          return _this.routeIndex(req, res);
+          _this.routeIndex(req, res);
+          _this.totalVist++;
+          _this.mobileList['totalVisit'] = _this.totalVist;
+          return _this.saveDB();
         };
       })(this));
       this.app.post(/store/, (function(_this) {
@@ -105,7 +100,7 @@
     };
 
     App.prototype.listMobile = function(req, res) {
-      var all, range, result, start;
+      var all, data, range, result, start;
       res.setHeader('Content-Type', 'application/json');
       range = 24;
       all = this.mobileArray.length;
@@ -116,7 +111,12 @@
         value = value.replace("m", "");
         return result[key] = value.substr(0, 3) + "****" + value.substr(7, value.length);
       });
-      return res.end(JSON.stringify(result));
+      data = {
+        totalvisit: this.totalVist,
+        total: this.mobileArray.length,
+        result: result
+      };
+      return res.end(JSON.stringify(data));
     };
 
     App.prototype.isValidate = function(mobile) {
@@ -144,6 +144,7 @@
             return console.log(err);
           } else {
             _this.mobileList = obj;
+            _this.totalVist = parseInt(_this.mobileList['totalVisit'], 10);
             _this.tmpMobileArray = _.keys(_this.mobileList);
             _this.mobileArray = [];
             return _.each(_this.tmpMobileArray, function(value, key) {

@@ -133,10 +133,12 @@
         dataType: 'JSON',
         type: "POST",
         success: function(data) {
-          var tpl;
-          if (data.length) {
+          var tpl, userlist;
+          userlist = data.result;
+          _this.showStatistic(data);
+          if (userlist.length) {
             tpl = '';
-            $.each(data, function(key, value) {
+            $.each(userlist, function(key, value) {
               return tpl += "<li>" + (value.replace("m", "")) + "</li>";
             });
             clearInterval(_this.interval);
@@ -147,6 +149,12 @@
         },
         error: function(e) {}
       });
+    };
+
+    App.prototype.showStatistic = function(data) {
+      $(".num-total").html(data.totalvisit);
+      $(".num-got").html(data.total);
+      return $(".statistic").show();
     };
 
     App.prototype.showHide = function() {

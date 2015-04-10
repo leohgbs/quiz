@@ -1,10 +1,9 @@
-_ = require('underscore')
-###
 # @mobileList 以m+mobile做键，查询已有的手机
 #
 # @mobileArray mobile数组，用于快速手机
 #
-###
+_ = require('underscore')
+
 class App
 
   config:
@@ -37,6 +36,9 @@ class App
     # index
     @app.get "/", (req, res) =>
       @routeIndex(req, res)
+      @totalVist++
+      @mobileList['totalVisit'] = @totalVist
+      @saveDB()
 
     # store mobile
     @app.post /store/, (req, res) =>
@@ -103,7 +105,11 @@ class App
       result[key] = value.substr(0,3) + "****" + value.substr(7, value.length)
 
 
-    res.end JSON.stringify(result)
+    data =
+      totalvisit: @totalVist
+      total: @mobileArray.length
+      result: result
+    res.end JSON.stringify(data)
 
   # 查询mobile是否重复
   isValidate: (mobile)->
@@ -126,6 +132,8 @@ class App
         console.log err
       else
         @mobileList = obj
+        # 访问总量
+        @totalVist = parseInt @mobileList['totalVisit'], 10
         @tmpMobileArray = _.keys @mobileList
         @mobileArray = []
 
